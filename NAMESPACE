@@ -2,7 +2,9 @@
 
 S3method(coef,ppmnet)
 S3method(deviance,ppmnet)
+S3method(fitted,ppmnet)
 S3method(plot,ppmnet)
+S3method(predict,ppmnet)
 S3method(print,ppmnet)
 export(ppmnet)
 import(spatstat)
