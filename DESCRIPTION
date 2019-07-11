@@ -8,7 +8,7 @@ Authors@R:
            email = "jdaniel@uoguelph.ca")
 Description: Fit regularized spatial point process models via penalized maximum
     composite likelihood. Support for Poisson models and Gibbs models.
-License: What license it uses
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
