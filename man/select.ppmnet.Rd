@@ -2,6 +2,7 @@
 % Please edit documentation in R/select.R
 \name{select.ppmnet}
 \alias{select.ppmnet}
+\alias{select}
 \title{Select a tuning parameter value from a 'ppmnet' object}
 \usage{
 \method{select}{ppmnet}(object, criterion = c("AIC", "BIC", "ERIC"), ...)

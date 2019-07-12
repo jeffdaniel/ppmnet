@@ -1,3 +1,4 @@
+#' @export
 select <- function(object, ...) {
   UseMethod("select")
 }
@@ -11,6 +12,7 @@ select <- function(object, ...) {
 #' @param criterion The criterion by which to select the tuning parameter. One
 #'        of \code{"AIC"}, \code{"BIC"}, or \code{"ERIC"}.
 #' @param ... Ignored
+#' @aliases select
 #' @importFrom stats as.formula
 #' @export
 select.ppmnet <- function(object, criterion = c("AIC", "BIC", "ERIC"), ...) {
