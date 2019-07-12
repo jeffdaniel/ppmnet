@@ -15,7 +15,25 @@ of \code{"AIC"}, \code{"BIC"}, or \code{"ERIC"}.}
 
 \item{...}{Ignored}
 }
+\value{
+A list containing \code{lambda}, the selected tuning parameter;
+        \code{coefs}, the coefficients of the selected model; \code{edf}, the
+        effective degrees of freedom for the regularization path; and
+        \code{criterion}; the computed criterion values for the
+        regularization path.
+}
 \description{
 Selects a point from along the fitted regularization path of a 'ppmnet'
 object on the basis of a (composite) information criterion.
+}
+\examples{
+Qp <- spatstat::quadscheme(Xp)
+fitp <- ppmnet(Qp, exdata)
+select(fitp, "BIC")
+
+Qg <- spatstat::quadscheme.logi(Xg)
+fitg <- ppmnet(Qg, exdata, interaction = spatstat::Geyer(5, 1),
+               method = "logi", nlambda = 20)
+select(fitg, "BIC")
+
 }

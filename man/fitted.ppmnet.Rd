@@ -18,7 +18,17 @@ used to fit the model are deleted.}
 
 \item{...}{Ignored}
 }
+\value{
+A matrix of fitted values, or, if \code{s} is of length 1, a vector
+        of fitted values.
+}
 \description{
 Computes the fitted conditional intensity for a regularized spatial point
 process model at the quadrature points used to fit the model.
+}
+\examples{
+Qp <- spatstat::quadscheme(Xp)
+fitp <- ppmnet(Qp, exdata)
+fitted(fitp)
+
 }

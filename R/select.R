@@ -12,6 +12,23 @@ select <- function(object, ...) {
 #' @param criterion The criterion by which to select the tuning parameter. One
 #'        of \code{"AIC"}, \code{"BIC"}, or \code{"ERIC"}.
 #' @param ... Ignored
+#'
+#' @return A list containing \code{lambda}, the selected tuning parameter;
+#'         \code{coefs}, the coefficients of the selected model; \code{edf}, the
+#'         effective degrees of freedom for the regularization path; and
+#'         \code{criterion}; the computed criterion values for the
+#'         regularization path.
+#'
+#' @examples
+#' Qp <- spatstat::quadscheme(Xp)
+#' fitp <- ppmnet(Qp, exdata)
+#' select(fitp, "BIC")
+#'
+#' Qg <- spatstat::quadscheme.logi(Xg)
+#' fitg <- ppmnet(Qg, exdata, interaction = spatstat::Geyer(5, 1),
+#'                method = "logi", nlambda = 20)
+#' select(fitg, "BIC")
+#'
 #' @aliases select
 #' @importFrom stats as.formula
 #' @export

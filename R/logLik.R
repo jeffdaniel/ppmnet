@@ -9,6 +9,13 @@
 #'        fit the regularization path.
 #' @param ... Ignored.
 #'
+#' @return A numeric vector.
+#'
+#' @examples
+#' Qp <- spatstat::quadscheme(Xp)
+#' fitp <- ppmnet(Qp, exdata)
+#' logLik(fitp)
+#'
 #' @export
 logLik.ppmnet <- function(object, s = NULL, ...) {
 

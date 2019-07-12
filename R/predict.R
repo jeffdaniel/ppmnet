@@ -24,6 +24,21 @@
 #'        spatial trend, "\code{intensity}" for the intensity (Poisson models
 #'         only), or "\code{cif}" for the conditional intensity.
 #' @param ... Additional arguments passed to \code{predict.glmnet}.
+#'
+#' @return A list of pixel images containing predictions, or, if \code{s} is of
+#'         length 1, a single pixel image.
+#'
+#' @examples
+#' # Predicted intensities
+#' Qp <- spatstat::quadscheme(Xp)
+#' fitp <- ppmnet(Qp, exdata)
+#' predict(fitp, exdata)
+#'
+#' # Predicted conditional intensities
+#' Qs <- spatstat::quadscheme(Xs)
+#' fits <- ppmnet(Qs, exdata, interaction = spatstat::Strauss(5), nlambda = 20)
+#' predict(fits, exdata, type = "cif")
+#'
 #' @export
 predict.ppmnet <- function(object, data, window = NULL,
                            eps = NULL, dimyx = NULL, s = NULL,
@@ -109,6 +124,15 @@ predict.ppmnet <- function(object, data, window = NULL,
 #' @param drop Logical value. If \code{TRUE}, quadrature points that were not
 #'        used to fit the model are deleted.
 #' @param ... Ignored
+#'
+#' @return A matrix of fitted values, or, if \code{s} is of length 1, a vector
+#'         of fitted values.
+#'
+#' @examples
+#' Qp <- spatstat::quadscheme(Xp)
+#' fitp <- ppmnet(Qp, exdata)
+#' fitted(fitp)
+#'
 #' @export
 fitted.ppmnet <- function(object, s = NULL, drop = FALSE, ...) {
   x <- object$x

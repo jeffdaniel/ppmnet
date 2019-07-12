@@ -37,7 +37,23 @@ spatial trend, "\code{intensity}" for the intensity (Poisson models
 
 \item{...}{Additional arguments passed to \code{predict.glmnet}.}
 }
+\value{
+A list of pixel images containing predictions, or, if \code{s} is of
+        length 1, a single pixel image.
+}
 \description{
 Makes predictions from a regularized spatial point process model fit via
 penalized composite likelihood.
+}
+\examples{
+# Predicted intensities
+Qp <- spatstat::quadscheme(Xp)
+fitp <- ppmnet(Qp, exdata)
+predict(fitp, exdata)
+
+# Predicted conditional intensities
+Qs <- spatstat::quadscheme(Xs)
+fits <- ppmnet(Qs, exdata, interaction = spatstat::Strauss(5), nlambda = 20)
+predict(fits, exdata, type = "cif")
+
 }
