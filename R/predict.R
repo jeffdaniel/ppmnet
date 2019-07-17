@@ -30,13 +30,13 @@
 #'
 #' @examples
 #' # Predicted intensities
-#' Qp <- spatstat::quadscheme(Xp)
+#' Qp <- quadscheme(Xp)
 #' fitp <- ppmnet(Qp, exdata)
 #' predict(fitp, exdata)
 #'
 #' # Predicted conditional intensities
-#' Qs <- spatstat::quadscheme(Xs)
-#' fits <- ppmnet(Qs, exdata, interaction = spatstat::Strauss(5), nlambda = 20)
+#' Qs <- quadscheme(Xs)
+#' fits <- ppmnet(Qs, exdata, Strauss(5), nlambda = 20)
 #' predict(fits, exdata, type = "cif")
 #'
 #' @export
@@ -129,7 +129,7 @@ predict.ppmnet <- function(object, data, window = NULL,
 #'         of fitted values.
 #'
 #' @examples
-#' Qp <- spatstat::quadscheme(Xp)
+#' Qp <- quadscheme(Xp)
 #' fitp <- ppmnet(Qp, exdata)
 #' fitted(fitp)
 #'

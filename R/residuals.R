@@ -14,10 +14,10 @@
 #'         component corresponding to a model in the  regularization path.
 #'
 #' @examples
-#' Qp <- spatstat::quadscheme(Xp)
+#' Qp <- quadscheme(Xp)
 #' fit <- ppmnet(Qp, exdata)
 #' res <- residuals(fit)
-#' smo <- spatstat::Smooth(unstack(res)[[40]])
+#' smo <- Smooth(unstack(res)[[40]])
 #' plot(smo)
 #'
 #' @importFrom stats fitted

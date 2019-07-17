@@ -25,10 +25,10 @@ Computes residual measures for a regularization path of point process models
 fit via penalized composite likelihood.
 }
 \examples{
-Qp <- spatstat::quadscheme(Xp)
+Qp <- quadscheme(Xp)
 fit <- ppmnet(Qp, exdata)
 res <- residuals(fit)
-smo <- spatstat::Smooth(unstack(res)[[40]])
+smo <- Smooth(unstack(res)[[40]])
 plot(smo)
 
 }

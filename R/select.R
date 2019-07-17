@@ -20,13 +20,12 @@ select <- function(object, ...) {
 #'         regularization path.
 #'
 #' @examples
-#' Qp <- spatstat::quadscheme(Xp)
+#' Qp <- quadscheme(Xp)
 #' fitp <- ppmnet(Qp, exdata)
 #' select(fitp, "BIC")
 #'
-#' Qg <- spatstat::quadscheme.logi(Xg)
-#' fitg <- ppmnet(Qg, exdata, interaction = spatstat::Geyer(5, 1),
-#'                method = "logi", nlambda = 20)
+#' Qg <- quadscheme.logi(Xg)
+#' fitg <- ppmnet(Qg, exdata, Geyer(5, 1), method = "logi", nlambda = 20)
 #' select(fitg, "BIC")
 #'
 #' @aliases select

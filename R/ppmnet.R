@@ -26,17 +26,16 @@
 #'
 #' @examples
 #' # Poisson model fit via penalized maximum likelihood
-#' Qp <- spatstat::quadscheme(Xp)
+#' Qp <- quadscheme(Xp)
 #' fitp <- ppmnet(Qp, exdata)
 #'
 #' # Strauss model fit via penalized maximum pseudolikelihood
-#' Qs <- spatstat::quadscheme(Xs)
-#' fits <- ppmnet(Qs, exdata, interaction = spatstat::Strauss(5), nlambda = 20)
+#' Qs <- quadscheme(Xs)
+#' fits <- ppmnet(Qs, exdata, Strauss(5), nlambda = 20)
 #'
 #' # Geyer saturation model fit via penalized logistic composite likelihood
-#' Qg <- spatstat::quadscheme.logi(Xg)
-#' fitg <- ppmnet(Qg, exdata, interaction = spatstat::Geyer(5, 1),
-#'                method = "logi", nlambda = 20)
+#' Qg <- quadscheme.logi(Xg)
+#' fitg <- ppmnet(Qg, exdata, Geyer(5, 1), method = "logi", nlambda = 20)
 #'
 #' @import spatstat
 #' @importFrom glmnet glmnet

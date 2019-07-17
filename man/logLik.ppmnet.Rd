@@ -23,7 +23,7 @@ Extracts the log likelihood for a regularized Poisson point process model, or
 the log composite likelihood for a regularized Gibbs point process model.
 }
 \examples{
-Qp <- spatstat::quadscheme(Xp)
+Qp <- quadscheme(Xp)
 fitp <- ppmnet(Qp, exdata)
 logLik(fitp)
 

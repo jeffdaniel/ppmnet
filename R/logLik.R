@@ -12,7 +12,7 @@
 #' @return A numeric vector.
 #'
 #' @examples
-#' Qp <- spatstat::quadscheme(Xp)
+#' Qp <- quadscheme(Xp)
 #' fitp <- ppmnet(Qp, exdata)
 #' logLik(fitp)
 #'

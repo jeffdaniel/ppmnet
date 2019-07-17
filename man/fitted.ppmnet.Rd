@@ -27,7 +27,7 @@ Computes the fitted conditional intensity for a regularized spatial point
 process model at the quadrature points used to fit the model.
 }
 \examples{
-Qp <- spatstat::quadscheme(Xp)
+Qp <- quadscheme(Xp)
 fitp <- ppmnet(Qp, exdata)
 fitted(fitp)
 
