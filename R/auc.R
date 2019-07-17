@@ -47,3 +47,57 @@ auc.ppmnet <- function(X, data, s = NULL, ...) {
 
   return(aucs)
 }
+
+#' ROC curves for a 'ppmnet' object
+#'
+#' Computes receiver operating characteristic (ROC) curves for a
+#' regularization path of point process models.
+#'
+#' @param X A fitted \code{ppmnet} object.
+#' @param data A list of pixel images (of class \code{imlist})
+#'        containing the spatial covariates used to fit the model.
+#' @param s Value(s) of the penalty tuning parameter at which the ROC curve is
+#'        to be calculated. Default is the entire sequence used to fit the
+#'        regularization path.
+#' @param ... Additional arguments passed to \code{predict.ppmnet}.
+#'
+#' @examples
+#' Qp <- quadscheme(Xp)
+#' fitp <- ppmnet(Qp, exdata, nlambda = 10)
+#' roc(fitp, exdata)
+#'
+#' @export
+roc.ppmnet <- function(X, data, s = NULL, ...) {
+
+  # Compute predictions and obtain null model
+  preds <- predict.ppmnet(X, data, s = s, ...)
+  nullmodel <- ppm(X$Q$data)
+
+  if (length(s) == 1) {
+    preds <- list(preds)
+  }
+
+  rocs <- list()
+  for (i in 1:length(preds)) {
+    D <- spatialCDFframe(nullmodel, preds[[i]])
+    U <- D$values$U
+    E <- ecdf(1 - U)
+    p <- seq(0, 1, length = 1024)
+    fobs <- E(p)
+    df <- data.frame(p = p, fobs = fobs, fnull = p)
+    rocs[[i]] <- fv(df,
+                    argu = "p",
+                    ylab = "ROC(p)",
+                    valu = "fobs",
+                    fmla = . ~ p,
+                    desc = c("fraction of area",
+                             "observed fraction of points",
+                             "expected fraction if no effect"),
+                    fname = "ROC")
+  }
+  if (length(rocs) == 1) {
+    rocs <- unlist(rocs)
+  }
+  return(rocs)
+}
+
