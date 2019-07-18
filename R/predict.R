@@ -49,6 +49,15 @@ predict.ppmnet <- function(object, data, window = NULL,
     stop("The argument 'data' must be a list of pixel images.",
          call. = FALSE)
   }
+  xnames <- colnames(object$x)
+  vnames <- object$vnames
+  if (!is.null(vnames)) {
+    xnames <- xnames[!(xnames %in% vnames)]
+  }
+  if (!all(names(data) == xnames)) {
+    stop("The names of the images in the argument 'data' do not match those
+          used to fit the model.", call. = FALSE)
+  }
 
   # Validate window
   if (!is.null(window) && !is.owin(window)) {
