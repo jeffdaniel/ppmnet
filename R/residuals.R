@@ -7,6 +7,8 @@
 #' @param s Value(s) of the penalty tuning parameter at which residuals are
 #'        to be computed. Default is the entire sequence used to fit the
 #'        regularization path.
+#' @param type Type of residuals to be computed. Options are \code{"raw"},
+#'        \code{"inverse"}, and \code{"pearson"}.
 #' @param ... Ignored
 #'
 #' @return If \code{s} is of length 1, a measure (of class \code{msr});
@@ -22,16 +24,25 @@
 #'
 #' @importFrom stats fitted
 #' @export
-residuals.ppmnet <- function(object, s = NULL, ...) {
+residuals.ppmnet <- function(object, s = NULL,
+                             type = c("raw", "inverse", "pearson"), ...) {
 
   # Extract relevant values
+  type <- match.arg(type)
   Q <- object$Q[object$subset]
   Z <- is.data(Q)
-  cif <- fitted(object, s = s, drop = TRUE)
+  cif <- fitted(object, s = s, drop = FALSE)
+  ind <- cif > 0
 
   # Compute residual measures
-  discrete <- rep.int(1, sum(Z))
-  density  <-  -cif
+  discrete <- switch(type,
+                     raw     = rep.int(1, sum(Z)),
+                     inverse = 1 / cif[Z, ],
+                     pearson = 1 / sqrt(cif[Z, ]))
+  density  <- switch(type,
+                     raw     = -cif,
+                     inverse = -ind,
+                     pearson = -ind * sqrt(cif))
   res <- msr(Q, discrete, density)
   res
 }

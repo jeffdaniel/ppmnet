@@ -4,7 +4,8 @@
 \alias{residuals.ppmnet}
 \title{Residuals for a 'ppmnet' object}
 \usage{
-\method{residuals}{ppmnet}(object, s = NULL, ...)
+\method{residuals}{ppmnet}(object, s = NULL, type = c("raw", "inverse",
+  "pearson"), ...)
 }
 \arguments{
 \item{object}{A fitted \code{ppmnet} object.}
@@ -12,6 +13,9 @@
 \item{s}{Value(s) of the penalty tuning parameter at which residuals are
 to be computed. Default is the entire sequence used to fit the
 regularization path.}
+
+\item{type}{Type of residuals to be computed. Options are \code{"raw"},
+\code{"inverse"}, and \code{"pearson"}.}
 
 \item{...}{Ignored}
 }
