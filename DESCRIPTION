@@ -17,3 +17,5 @@ Depends:
     spatstat
 URL: https://github.com/jeffdaniel/ppmnet
 BugReports: https://github.com/jeffdaniel/ppmnet/issues
+Suggests: 
+    testthat (>= 2.1.0)
