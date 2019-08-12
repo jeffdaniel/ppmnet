@@ -5,6 +5,7 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
+library(ppmnet)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -12,6 +13,11 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+
+```{r, include = FALSE}
+par(mar = c(0, 0, 0, 0))
+``` 
+
 # ppmnet
 
 <!-- badges: start -->
@@ -23,6 +29,7 @@ Models are fit via penalized likelihood for Poisson point processes, and via pen
 The model-fitting procedure is carried out by `glmnet`, which implements the lasso and elastic net penalties.
 A number of methods are provided for plotting, prediction, validation, and model selection on the basis of (composite) information criteria.
 
+This package closely conforms to the conventions of the `spatstat` package, and relies heavily on `spatstat` classes and functions. As such, use of `ppmnet` should be straightforward to those familiar with `spatstat`.
 
 ## Installation
 
@@ -30,7 +37,6 @@ You can install `ppmnet` from [GitHub](https://github.com/) with:
 
 ```{r installation, eval = FALSE}
 devtools::install_github("jeffdaniel/ppmnet")
-library(ppmnet)
 ```
 
 ## Example
@@ -47,16 +53,9 @@ lambda <- select(fit, "AIC")$lambda
 plot(predict(fit, bei.extra, s = lambda))
 ```
 
-Examine the smoothed residuals for the selected model.
+Examine the smoothed residual field for the selected model.
 ```{r resplot}
 plot(Smooth(residuals(fit, s = lambda)))
-```
-
-
-Fit an inhomogeneous area-interaction model to the `bei` dataset via penalized logistic composite likelihood.
-```{r aifit}
-fit.ai <- ppmnet(quadscheme.logi(bei), bei.extra,
-                 interaction = AreaInter(10), method = "logi")
 ```
 
 ## Citation

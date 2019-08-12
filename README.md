@@ -17,13 +17,17 @@ lasso and elastic net penalties. A number of methods are provided for
 plotting, prediction, validation, and model selection on the basis of
 (composite) information criteria.
 
+This package closely conforms to the conventions of the `spatstat`
+package, and relies heavily on `spatstat` classes and functions. As
+such, use of `ppmnet` should be straightforward to those familiar with
+`spatstat`.
+
 ## Installation
 
 You can install `ppmnet` from [GitHub](https://github.com/) with:
 
 ``` r
 devtools::install_github("jeffdaniel/ppmnet")
-library(ppmnet)
 ```
 
 ## Example
@@ -46,22 +50,13 @@ plot(predict(fit, bei.extra, s = lambda))
 
 <img src="man/figures/README-beiplot-1.png" width="100%" />
 
-Examine the smoothed residuals for the selected model.
+Examine the smoothed residual field for the selected model.
 
 ``` r
 plot(Smooth(residuals(fit, s = lambda)))
 ```
 
 <img src="man/figures/README-resplot-1.png" width="100%" />
-
-Fit an inhomogeneous area-interaction model to the `bei` dataset via
-penalized logistic composite likelihood.
-
-``` r
-fit.ai <- ppmnet(quadscheme.logi(bei), bei.extra,
-                 interaction = AreaInter(10), method = "logi")
-#> Large quadrature scheme split into blocks to avoid memory size limits; 16900 dummy points split into 17 blocks, the first 16 blocks containing 995 dummy points and the last block containing 980 dummy points
-```
 
 ## Citation
 
