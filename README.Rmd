@@ -1,0 +1,64 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# ppmnet
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+`ppmnet` is an R package for fitting regularized spatial point process models.
+
+Models are fit via penalized likelihood for Poisson point processes, and via penalized composite likelihood for Gibbs point processes. 
+The model-fitting procedure is carried out by `glmnet`, which implements the lasso and elastic net penalties.
+A number of methods are provided for plotting, prediction, validation, and model selection on the basis of (composite) information criteria.
+
+
+## Installation
+
+You can install `ppmnet` from [GitHub](https://github.com/) with:
+
+```{r installation, eval = FALSE}
+devtools::install_github("jeffdaniel/ppmnet")
+library(ppmnet)
+```
+
+## Example
+
+Fit a regularized inhomogeneous Poisson point process model to the `bei` dataset
+included with `spatstat`.
+```{r beifit}
+fit <- ppmnet(quadscheme(bei), bei.extra)
+```
+
+Select the optimal model from the regularization path on the basis of minimum AIC and plot the model's predicted intensity surface.
+```{r beiplot}
+lambda <- select(fit, "AIC")$lambda
+plot(predict(fit, bei.extra, s = lambda))
+```
+
+Examine the smoothed residuals for the selected model.
+```{r resplot}
+plot(Smooth(residuals(fit, s = lambda)))
+```
+
+
+Fit an inhomogeneous area-interaction model to the `bei` dataset via penalized logistic composite likelihood.
+```{r aifit}
+fit.ai <- ppmnet(quadscheme.logi(bei), bei.extra,
+                 interaction = AreaInter(10), method = "logi")
+```
+
+## Citation
+
+Daniel, J., Horrocks, J., and Umphrey, G. J. Penalized composite likelihoods for inhomogeneous Gibbs point process models. *Computational Statistics and Data Analysis*, **124**, 104--116. https://doi.org/10.1016/j.csda.2018.02.005
